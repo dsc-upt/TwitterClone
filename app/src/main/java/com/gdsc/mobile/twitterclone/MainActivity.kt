@@ -3,34 +3,43 @@ package com.gdsc.mobile.twitterclone
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.*
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationView
+import com.gdsc.mobile.twitterclone.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var appBarConfig: AppBarConfiguration
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setSupportActionBar(findViewById(R.id.toolbar))
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
-        val navBottomView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        val navDrawerView = findViewById<NavigationView>(R.id.navigation_drawer)
-        val drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
+        setupBottomNavigation()
+        setupNavigationDrawer()
+        setupAppBarConfig()
+    }
 
-        appBarConfig = AppBarConfiguration(setOf(R.id.homeFragment,R.id.searchFragment), drawerLayout)
+    private fun setupBottomNavigation() {
+        binding.bottomNavigation.setupWithNavController(navController)
+    }
 
+    private fun setupNavigationDrawer() {
+        binding.navigationDrawer.setupWithNavController(navController)
+    }
+
+    private fun setupAppBarConfig() {
+        appBarConfig =
+            AppBarConfiguration(setOf(R.id.homeFragment, R.id.searchFragment), binding.drawerLayout)
         setupActionBarWithNavController(navController, appBarConfig)
-        navDrawerView.setupWithNavController(navController)
-        navBottomView.setupWithNavController(navController)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

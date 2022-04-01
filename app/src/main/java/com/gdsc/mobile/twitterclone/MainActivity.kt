@@ -2,7 +2,9 @@ package com.gdsc.mobile.twitterclone
 
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -14,10 +16,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var appBarConfig: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private val mainViewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        binding.lifecycleOwner = this
+        binding.mainViewModel = mainViewModel
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
         val navHostFragment =

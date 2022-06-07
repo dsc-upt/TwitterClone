@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -20,17 +19,23 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         binding.lifecycleOwner = this
         binding.mainViewModel = mainViewModel
+
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
+
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
+
         setupBottomNavigation()
         setupNavigationDrawer()
         setupAppBarConfig()
+        
+        binding.toolbar.setNavigationIcon(R.drawable.bookmarks_icon)
     }
 
     private fun setupBottomNavigation() {

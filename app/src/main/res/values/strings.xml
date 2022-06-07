@@ -4,4 +4,11 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="menu_item_home">Home</string>
     <string name="menu_item_search">Search</string>
+    <string name="profile">Profile</string>
+    <string name="lists">Lists</string>
+    <string name="topics">Topics</string>
+    <string name="bookmarks">Bookmarks</string>
+    <string name="moments">Moments</string>
+    <string name="settingsPrivacy">Settings and Privacy</string>
+    <string name="helpCenter">Help Center</string>
 </resources>
